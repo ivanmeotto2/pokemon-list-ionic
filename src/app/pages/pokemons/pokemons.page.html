@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pokemon List</ion-title>
+  </ion-toolbar>
+  <ion-searchbar [(ngModel)]="search" (ionChange)="searchChanged()">
+  </ion-searchbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-between">
+      <ion-col sizeMd="6" sizeSm="12">
+        <ion-title>Tutti i pokemon</ion-title>
+        <ion-card *ngFor="let pokemon of results">
+          <ion-row class="ion-justify-content-between">
+            <ion-row class="width-80" [routerLink]="['/', 'pokemons', pokemon.id]">
+              <ion-card-content class="flex">
+                <ion-card-content>
+                  <ion-avatar>
+                    <img [src]="pokemon.sprites.front_default" />
+                  </ion-avatar>
+                </ion-card-content>
+                <ion-card-header>
+                  <ion-card-title>{{pokemon.name | titlecase}}</ion-card-title>
+                  <ion-card-subtitle class="ion-justify-content-start"><small class="ion-padding-end"
+                      *ngFor="let type of pokemon.types">{{type.type.name|uppercase}}</small>
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card-content>
+            </ion-row>
+            <ion-card-content class="ion-justify-content-end star-icon-container">
+              <ion-avatar (click)="addToFavourites(pokemon)">
+                <ion-icon name="star-outline"></ion-icon>
+              </ion-avatar>
+            </ion-card-content>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+      <ion-col sizeSm="12" sizeMd="6">
+        <ion-title>I tuoi preferiti</ion-title>
+        <ion-card *ngFor="let pokemon of favourites">
+          <ion-row class="ion-justify-content-between">
+            <ion-row class="width-80" [routerLink]="['/', 'pokemons', pokemon.id]">
+              <ion-card-content class="flex">
+                <ion-card-content>
+                  <ion-avatar>
+                    <img [src]="pokemon.sprites.front_default" />
+                  </ion-avatar>
+                </ion-card-content>
+                <ion-card-header>
+                  <ion-card-title>{{pokemon.name | titlecase}}</ion-card-title>
+                  <ion-card-subtitle class="ion-justify-content-start"><small class="ion-padding-end"
+                      *ngFor="let type of pokemon.types">{{type.type.name|uppercase}}</small>
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card-content>
+            </ion-row>
+            <ion-card-content class="ion-justify-content-end star-icon-container">
+              <ion-avatar (click)="removeFromFavourites(pokemon)">
+                <ion-icon name="close"></ion-icon>
+              </ion-avatar>
+            </ion-card-content>
+          </ion-row>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Retrieving more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

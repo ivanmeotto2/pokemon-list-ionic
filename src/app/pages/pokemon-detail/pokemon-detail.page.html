@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-col>
+  <ion-card *ngIf="details" class="ion-justify-content-center">
+    <ion-button [routerLink]="['/', 'pokemons']">
+      <ion-icon name="arrow-back"></ion-icon>
+      Go back
+    </ion-button>
+    <ion-grid>
+      <ion-row>
+        <ion-img [src]="details.sprites.front_default">
+        </ion-img>
+        <ion-col class="details-column" size="6">
+          <ion-card-title>{{details.name|uppercase}}</ion-card-title>
+          <ion-card-subtitle class="ion-justify-content-start"><small class="ion-padding-end"
+              *ngFor="let type of details.types">{{type.type.name|uppercase}}</small>
+          </ion-card-subtitle>
+          <ion-row *ngIf="species?.is_legendary">
+            <ion-card-subtitle class="ion-justify-content-start">Is Legendary: </ion-card-subtitle>
+            <p>{{species?.is_legendary ? 'YES' : 'NO'}}</p>
+          </ion-row>
+          <ion-row *ngIf="species?.flavor_text_entries[0].flavor_text">
+            <ion-card-subtitle class="ion-justify-content-start">Description: </ion-card-subtitle>
+            <p>{{species?.flavor_text_entries[0].flavor_text}}</p>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-col>

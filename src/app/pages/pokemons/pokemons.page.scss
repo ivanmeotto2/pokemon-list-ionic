@@ -1,0 +1,39 @@
+ion-row {
+  .width-80 {
+    flex-grow: 1;
+  }
+  .flex {
+    display: flex;
+  }
+  .star-icon-container {
+    align-self: center;
+    ion-avatar {
+      width: fit-content;
+      height: fit-content;
+      ion-icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
+  }
+  ion-col {
+    ion-title {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+ion-card {
+  cursor: pointer;
+}
+ion-card:hover {
+  background-color: #ffffff50;
+  transition: ease 0.2s linear;
+  ion-searchbar {
+    position: static;
+  }
+}
+
+ion-grid {
+  overflow-y: scroll;
+}
